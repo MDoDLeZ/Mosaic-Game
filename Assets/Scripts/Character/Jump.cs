@@ -17,7 +17,7 @@ public class Jump : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void startJump()
+    public void JumpStart()
     {
         isGrounded = Physics2D.OverlapCircle(feetPos.position, radCircle, whatIsGround);
 
