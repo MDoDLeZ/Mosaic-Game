@@ -3,6 +3,7 @@
 public class CheckWall : MonoBehaviour
 {
     public Transform feetPos;
+    public Transform climbingIsWall;
     public float radCircle;
     public LayerMask isWall;
 
@@ -16,10 +17,12 @@ public class CheckWall : MonoBehaviour
 
     private void Update()
     {
-        contraBool = Physics2D.OverlapCircle(feetPos.position, radCircle, isWall);
+        contraBool = Physics2D.Linecast(transform.parent.position, climbingIsWall.position, isWall);
 
-        if (!contraBool && climbing.isClimbing) {
+        if (!contraBool && climbing.isClimbing)
+        {
             climbing.ClimbingContra();
+            print("qwe");
         }
     }
 
@@ -34,5 +37,12 @@ public class CheckWall : MonoBehaviour
         {
             climbing.ClimbingStop();
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+
+        Gizmos.DrawLine(transform.parent.position, climbingIsWall.position);
     }
 }

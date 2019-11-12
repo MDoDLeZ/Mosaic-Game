@@ -3,7 +3,6 @@
 public class Climbing : MonoBehaviour
 {
     public float climdForce;
-    public Transform feetPos;
     public bool isClimbing;
 
     private Rigidbody2D rb;
@@ -17,11 +16,10 @@ public class Climbing : MonoBehaviour
     {
         if (isClimbing == true)
         {
-            Vector2 grav = transform.up * -climdForce;
-            rb.velocity = grav + rb.velocity;
+            rb.velocity = transform.up * -climdForce;
         }
 
-        Debug.Log(transform.localRotation.eulerAngles.z);
+        //Debug.Log(transform.localRotation.eulerAngles.z);
     }
 
     public void ClimbingStart()
@@ -68,7 +66,17 @@ public class Climbing : MonoBehaviour
 
     public void ClimbingStop()
     {
-        transform.rotation = Quaternion.Euler(0, 0, 0);
-        isClimbing = false;
+        if (isClimbing)
+        {
+            if (transform.localRotation.eulerAngles.z == 270)
+                transform.localScale = new Vector3(1, 1, 1);
+            else
+                transform.localScale = new Vector3(-1, 1, 1);
+
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+
+
+            isClimbing = false;
+        }
     }
 }

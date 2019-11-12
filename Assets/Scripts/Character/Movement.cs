@@ -50,10 +50,10 @@ public class Movement : MonoBehaviour
 
         if (climbing.isClimbing)
             if (transform.localRotation.eulerAngles.z == 180 || transform.localRotation.eulerAngles.z == 0)
-                rb.velocity = new Vector2(ax * speed, rb.velocity.y);
+                transform.Translate(transform.right * speed * ax * Time.deltaTime);
             else
-                rb.velocity = new Vector2(rb.velocity.x, ay * speed);
+                transform.Translate(-transform.up * speed * ay * Time.deltaTime);
         else
-            rb.velocity = new Vector2(ax * speed, rb.velocity.y);
+            transform.Translate(transform.right * speed * ax * Time.deltaTime);
     }
 }
